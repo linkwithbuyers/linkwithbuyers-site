@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://linkwithbuyers.com/sitemap.xml

@@ -1,0 +1,513 @@
+{
+  "assets": [
+    {
+      "contentType": "image/avif",
+      "id": "da81f039e6e76e9a",
+      "kind": "image",
+      "name": "High-rez-transparent.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/da81f039e6e76e9a.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2000/https://cdn.gamma.app/q3mxpyhcnist6b2/d82899ecd33843feacef2ec877e04426/original/High-rez-transparent.png"
+    },
+    {
+      "contentType": "image/gif",
+      "id": "24eab3530cab95dc",
+      "kind": "image",
+      "name": "80percent.gif",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/24eab3530cab95dc.gif",
+      "url": "https://cdn.gamma.app/q3mxpyhcnist6b2/047492d47dd84113a4946a73cbb25aec/optimized/80percent.gif"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "28fb07f90c3521e6",
+      "kind": "image",
+      "name": "image.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/28fb07f90c3521e6.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2000/https://cdn.gamma.app/q3mxpyhcnist6b2/5cf7530b4b25496ab13ab476386356a7/original/image.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "03ca5fd060bae43f",
+      "kind": "image",
+      "name": "image.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/03ca5fd060bae43f.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2000/https://cdn.gamma.app/q3mxpyhcnist6b2/ba6fcfb567354c79ab7e1073cad725bb/original/image.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "1a0f06217eb14f57",
+      "kind": "image",
+      "name": "image.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/1a0f06217eb14f57.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2000/https://cdn.gamma.app/q3mxpyhcnist6b2/a2798e5743f2438a8c55f88fbf9d8d31/original/image.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "955a1dc5d6543558",
+      "kind": "image",
+      "name": "image.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/955a1dc5d6543558.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2000/https://cdn.gamma.app/q3mxpyhcnist6b2/3f285dd6e6c94f47a812e6c39ed44c01/original/image.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "a1a420d4a9cebeb1",
+      "kind": "image",
+      "name": "image.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/a1a420d4a9cebeb1.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2000/https://cdn.gamma.app/q3mxpyhcnist6b2/5b5cce719e6d443cacfb78c732279d8c/original/image.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "07c30129d2dd0dd6",
+      "kind": "image",
+      "name": "image.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/07c30129d2dd0dd6.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2000/https://cdn.gamma.app/q3mxpyhcnist6b2/0283e8a4ee0846b7bccaa2e3d37e6891/original/image.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "810fffc3b4026271",
+      "kind": "image",
+      "name": "image.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/810fffc3b4026271.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2000/https://cdn.gamma.app/q3mxpyhcnist6b2/92b0296d5c604dc793314adb44b23b27/original/image.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "5a7f3e86d273fe44",
+      "kind": "image",
+      "name": "image.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/5a7f3e86d273fe44.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2000/https://cdn.gamma.app/q3mxpyhcnist6b2/e8dedeb226a94c0b8a8705b394835d86/original/image.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "bc79d9c326d471d1",
+      "kind": "image",
+      "name": "image.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/bc79d9c326d471d1.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2000/https://cdn.gamma.app/q3mxpyhcnist6b2/56a5adb6e62142dd8314caf23d82e83c/original/image.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "7ea56dd6016d9fbf",
+      "kind": "image",
+      "name": "image.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/7ea56dd6016d9fbf.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2000/https://cdn.gamma.app/q3mxpyhcnist6b2/11079eccbb2242c4840ee12f3b062c7b/original/image.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "1a5ea5e589cb991e",
+      "kind": "image",
+      "name": "image.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/1a5ea5e589cb991e.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2000/https://cdn.gamma.app/q3mxpyhcnist6b2/4831c86be3004a089e88b13db8b0c644/original/image.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "9b7b50607f18e3df",
+      "kind": "image",
+      "name": "image.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/9b7b50607f18e3df.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2000/https://cdn.gamma.app/q3mxpyhcnist6b2/8aa63c88b3674a258de94e5649da216e/original/image.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "721ea9c04edd2140",
+      "kind": "image",
+      "name": "image.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/721ea9c04edd2140.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2000/https://cdn.gamma.app/q3mxpyhcnist6b2/b80b271a92b84d33b3c2586c4b4ee9e2/original/image.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "88564d616600a313",
+      "kind": "image",
+      "name": "image.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/88564d616600a313.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2000/https://cdn.gamma.app/q3mxpyhcnist6b2/acdb59560ae345479fba60aa3b21f6a7/original/image.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "0dce0a59f16ccec4",
+      "kind": "image",
+      "name": "image.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/0dce0a59f16ccec4.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2000/https://cdn.gamma.app/q3mxpyhcnist6b2/ae54afcfe6b7409db5d8f4c867d39e06/original/image.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "94fa74b1aec6f661",
+      "kind": "image",
+      "name": "image.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/94fa74b1aec6f661.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2000/https://cdn.gamma.app/q3mxpyhcnist6b2/a465e2aeb5fb4cdeba7a52598f29df37/original/image.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "6d01dfe96ab1ae8a",
+      "kind": "image",
+      "name": "image.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/6d01dfe96ab1ae8a.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2000/https://cdn.gamma.app/q3mxpyhcnist6b2/2245ce6591834034bfc2cfcc23fa5be0/original/image.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "5c2412ec2dfed084",
+      "kind": "image",
+      "name": "image.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/5c2412ec2dfed084.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2000/https://cdn.gamma.app/q3mxpyhcnist6b2/5e2d2aff119b47ae8ab9e61b56bebfe6/original/image.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "076d94f3266057e1",
+      "kind": "image",
+      "name": "image.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/076d94f3266057e1.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2000/https://cdn.gamma.app/q3mxpyhcnist6b2/20482f6e331b41c392aec684d1eabe1f/original/image.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "55056126e2ad293e",
+      "kind": "image",
+      "name": "image.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/55056126e2ad293e.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2000/https://cdn.gamma.app/q3mxpyhcnist6b2/1bb1b42821d14bf986a0c1dbcdd6545f/original/image.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "020ec16c9da9f798",
+      "kind": "image",
+      "name": "r0yOP5p9D2IZbM9C.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/020ec16c9da9f798.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2400/https://cdn.gamma.app/q3mxpyhcnist6b2/generated-images/r0yOP5p9D2IZbM9C.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "d45a724c6458bb01",
+      "kind": "image",
+      "name": "SJvPVT1uysEGF5iP.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/d45a724c6458bb01.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2400/https://cdn.gamma.app/q3mxpyhcnist6b2/generated-images/SJvPVT1uysEGF5iP.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "2332dea135de3561",
+      "kind": "image",
+      "name": "_nxnxIoaK2q0fnRr.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/2332dea135de3561.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2400/https://cdn.gamma.app/q3mxpyhcnist6b2/generated-images/_nxnxIoaK2q0fnRr.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "3ba349a311d40153",
+      "kind": "image",
+      "name": "11w3WHsVFmPhxl18.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/3ba349a311d40153.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2400/https://cdn.gamma.app/q3mxpyhcnist6b2/generated-images/11w3WHsVFmPhxl18.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "7d23bd85f3f944eb",
+      "kind": "image",
+      "name": "nL3XRGFpcOwCL5tz.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/7d23bd85f3f944eb.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2400/https://cdn.gamma.app/q3mxpyhcnist6b2/generated-images/nL3XRGFpcOwCL5tz.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "054a5bf39116bc6d",
+      "kind": "image",
+      "name": "cpRBemEO8C6h8Xpu.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/054a5bf39116bc6d.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2400/https://cdn.gamma.app/q3mxpyhcnist6b2/generated-images/cpRBemEO8C6h8Xpu.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "79909cbfd2592952",
+      "kind": "image",
+      "name": "XbIlG1BdiFKWbtoG.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/79909cbfd2592952.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2400/https://cdn.gamma.app/q3mxpyhcnist6b2/generated-images/XbIlG1BdiFKWbtoG.png"
+    },
+    {
+      "contentType": "image/avif",
+      "id": "aa5b4dea889dd642",
+      "kind": "image",
+      "name": "odvMRvN1wq4B2Quo.png",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/aa5b4dea889dd642.png",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2400/https://cdn.gamma.app/q3mxpyhcnist6b2/generated-images/odvMRvN1wq4B2Quo.png"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "b48f97d0d1c9adbe",
+      "kind": "image",
+      "name": "svg-1",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/b48f97d0d1c9adbe.svg",
+      "url": "inline-svg:b48f97d0d1c9adbe"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "6b43ab4eb460c3f7",
+      "kind": "image",
+      "name": "svg-2",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/6b43ab4eb460c3f7.svg",
+      "url": "inline-svg:6b43ab4eb460c3f7"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "a67f633c5dc4cb1f",
+      "kind": "image",
+      "name": "svg-3",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/a67f633c5dc4cb1f.svg",
+      "url": "inline-svg:a67f633c5dc4cb1f"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "d45364726d0429e1",
+      "kind": "image",
+      "name": "svg-4",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/d45364726d0429e1.svg",
+      "url": "inline-svg:d45364726d0429e1"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "e1d12487fa2733f5",
+      "kind": "image",
+      "name": "svg-5",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/e1d12487fa2733f5.svg",
+      "url": "inline-svg:e1d12487fa2733f5"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "16eb290723007054",
+      "kind": "image",
+      "name": "svg-6",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/16eb290723007054.svg",
+      "url": "inline-svg:16eb290723007054"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "86319e2b6111fab1",
+      "kind": "image",
+      "name": "svg-7",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/86319e2b6111fab1.svg",
+      "url": "inline-svg:86319e2b6111fab1"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "e52546a6a25ebf05",
+      "kind": "image",
+      "name": "svg-8",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/e52546a6a25ebf05.svg",
+      "url": "inline-svg:e52546a6a25ebf05"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "3ef9aa76f69f5191",
+      "kind": "image",
+      "name": "svg-9",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/3ef9aa76f69f5191.svg",
+      "url": "inline-svg:3ef9aa76f69f5191"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "9d92de144130b39f",
+      "kind": "image",
+      "name": "svg-10",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/9d92de144130b39f.svg",
+      "url": "inline-svg:9d92de144130b39f"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "35d67cf59bd69d75",
+      "kind": "image",
+      "name": "svg-11",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/35d67cf59bd69d75.svg",
+      "url": "inline-svg:35d67cf59bd69d75"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "7ba2180f8a671508",
+      "kind": "image",
+      "name": "svg-12",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/7ba2180f8a671508.svg",
+      "url": "inline-svg:7ba2180f8a671508"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "a44afa84742daa5e",
+      "kind": "image",
+      "name": "svg-13",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/a44afa84742daa5e.svg",
+      "url": "inline-svg:a44afa84742daa5e"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "3f9a930b31523d13",
+      "kind": "image",
+      "name": "svg-14",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/3f9a930b31523d13.svg",
+      "url": "inline-svg:3f9a930b31523d13"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "4517508ddf83dc30",
+      "kind": "image",
+      "name": "svg-15",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/4517508ddf83dc30.svg",
+      "url": "inline-svg:4517508ddf83dc30"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "8b95002c61f10e3c",
+      "kind": "image",
+      "name": "svg-16",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/8b95002c61f10e3c.svg",
+      "url": "inline-svg:8b95002c61f10e3c"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "a5d1d65169bbd3c2",
+      "kind": "image",
+      "name": "svg-17",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/a5d1d65169bbd3c2.svg",
+      "url": "inline-svg:a5d1d65169bbd3c2"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "1ef3280cd88ae91e",
+      "kind": "image",
+      "name": "svg-18",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/1ef3280cd88ae91e.svg",
+      "url": "inline-svg:1ef3280cd88ae91e"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "4c97f77abba1a99b",
+      "kind": "image",
+      "name": "svg-19",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/4c97f77abba1a99b.svg",
+      "url": "inline-svg:4c97f77abba1a99b"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "b34af33fa0e7c2a5",
+      "kind": "image",
+      "name": "svg-20",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/b34af33fa0e7c2a5.svg",
+      "url": "inline-svg:b34af33fa0e7c2a5"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "c738a5ff596e17fc",
+      "kind": "image",
+      "name": "svg-21",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/c738a5ff596e17fc.svg",
+      "url": "inline-svg:c738a5ff596e17fc"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "bd3aad0a4eccecd9",
+      "kind": "image",
+      "name": "svg-22",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/bd3aad0a4eccecd9.svg",
+      "url": "inline-svg:bd3aad0a4eccecd9"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "10f94969ecb4f94b",
+      "kind": "image",
+      "name": "svg-23",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/10f94969ecb4f94b.svg",
+      "url": "inline-svg:10f94969ecb4f94b"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "70b9b5140319c850",
+      "kind": "image",
+      "name": "svg-24",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/70b9b5140319c850.svg",
+      "url": "inline-svg:70b9b5140319c850"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "14f3c62bed67eade",
+      "kind": "image",
+      "name": "svg-25",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/14f3c62bed67eade.svg",
+      "url": "inline-svg:14f3c62bed67eade"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "d969c1a67497bc81",
+      "kind": "image",
+      "name": "svg-26",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/d969c1a67497bc81.svg",
+      "url": "inline-svg:d969c1a67497bc81"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "41ceb72ed7fa7c02",
+      "kind": "image",
+      "name": "svg-27",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/41ceb72ed7fa7c02.svg",
+      "url": "inline-svg:41ceb72ed7fa7c02"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "8223b80ced7662a4",
+      "kind": "image",
+      "name": "svg-28",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/8223b80ced7662a4.svg",
+      "url": "inline-svg:8223b80ced7662a4"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "d04b99ee3b77610b",
+      "kind": "image",
+      "name": "svg-29",
+      "path": "C:\\Users\\DZ\\AppData\\Local\\Temp/browser-use/assets/208b4b28-3ab1-4fb3-955d-74990e612768/d04b99ee3b77610b.svg",
+      "url": "inline-svg:d04b99ee3b77610b"
+    }
+  ],
+  "failures": [
+    {
+      "contentType": null,
+      "id": "4f5c8a7688248a1d",
+      "name": "image.png",
+      "reason": "Loaded resource fetch failed: Asset bundling failed; page fetch failed: Browser Use encountered an error interacting with this webpage: TypeError: Failed to fetch\n    at xK (<anonymous>:1:41)\n    at <anonymous>:1:354",
+      "url": "https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:2000/https://cdn.gamma.app/q3mxpyhcnist6b2/b824998d95e948da914a5bd5562fa3d/original/image.png"
+    },
+    {
+      "contentType": null,
+      "id": "95adebae5b19ed8e",
+      "name": "HNQda67QU5esBscdGhVMsW.svg",
+      "reason": "Loaded resource fetch failed: Asset bundling failed; page fetch failed: Browser Use encountered an error interacting with this webpage: TypeError: Failed to fetch\n    at xK (<anonymous>:1:41)\n    at <anonymous>:1:354",
+      "url": "https://icon.pictographic.io/image/HNQda67QU5esBscdGhVMsW.svg?stroke=45&ctx=accessory-img-inline-svg"
+    },
+    {
+      "contentType": null,
+      "id": "21a6d7b7b3de98f7",
+      "name": "98c5a333e6dc4d52a9dc.svg",
+      "reason": "Loaded resource fetch failed: Asset bundling failed; page fetch failed: Browser Use encountered an error interacting with this webpage: TypeError: Failed to fetch\n    at xK (<anonymous>:1:41)\n    at <anonymous>:1:354",
+      "url": "https://icon.pictographic.io/image/98c5a333e6dc4d52a9dc.svg?stroke=45&ctx=accessory-img-inline-svg"
+    },
+    {
+      "contentType": null,
+      "id": "c024f76baaa3b04f",
+      "name": "wbKIesniB9bqNMf45R9E.svg",
+      "reason": "Loaded resource fetch failed: Asset bundling failed; page fetch failed: Browser Use encountered an error interacting with this webpage: TypeError: Failed to fetch\n    at xK (<anonymous>:1:41)\n    at <anonymous>:1:354",
+      "url": "https://icon.pictographic.io/image/wbKIesniB9bqNMf45R9E.svg?stroke=45&ctx=accessory-img-inline-svg"
+    },
+    {
+      "contentType": null,
+      "id": "84039ae9a8311a9b",
+      "name": "kmpBudZwQ9RN9pYey0R4.svg",
+      "reason": "Loaded resource fetch failed: Asset bundling failed; page fetch failed: Browser Use encountered an error interacting with this webpage: TypeError: Failed to fetch\n    at xK (<anonymous>:1:41)\n    at <anonymous>:1:354",
+      "url": "https://icon.pictographic.io/image/kmpBudZwQ9RN9pYey0R4.svg?stroke=45&ctx=accessory-img-inline-svg"
+    }
+  ]
+}

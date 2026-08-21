@@ -1,0 +1,27 @@
+(() => {
+  const carousel = document.querySelector('.response-carousel');
+  if (!carousel) return;
+  const track = carousel.querySelector('.response-carousel__track');
+  const slides = [...carousel.querySelectorAll('.response-carousel__slide')];
+  const current = carousel.querySelector('[data-carousel-current]');
+  const total = carousel.querySelector('[data-carousel-total]');
+  const previous = carousel.querySelector('[data-carousel-prev]');
+  const next = carousel.querySelector('[data-carousel-next]');
+  const toggle = carousel.querySelector('[data-carousel-toggle]');
+  let index = 0;
+  let paused = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let timer;
+  total.textContent = slides.length;
+  const render = () => { track.style.transform = `translateX(-${index * 100}%)`; current.textContent = index + 1; };
+  const stop = () => { clearInterval(timer); timer = undefined; };
+  const start = () => { stop(); if (!paused) timer = setInterval(() => { index = (index + 1) % slides.length; render(); }, 4500); };
+  const move = amount => { index = (index + amount + slides.length) % slides.length; render(); start(); };
+  previous.addEventListener('click', () => move(-1));
+  next.addEventListener('click', () => move(1));
+  toggle.addEventListener('click', () => { paused = !paused; toggle.textContent = paused ? 'Play' : 'Pause'; toggle.setAttribute('aria-pressed', String(paused)); start(); });
+  carousel.addEventListener('mouseenter', stop);
+  carousel.addEventListener('mouseleave', start);
+  carousel.addEventListener('focusin', stop);
+  carousel.addEventListener('focusout', start);
+  render(); start();
+})();

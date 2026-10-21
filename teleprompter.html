@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Teleprompter</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; background: #000; color: #fff; font-family: -apple-system, "Segoe UI", Roboto, sans-serif; overflow: hidden; }
+
+  /* ---------- Edit screen ---------- */
+  #editor { height: 100%; display: flex; flex-direction: column; }
+  #editor header { padding: 14px 16px 8px; font-size: 20px; font-weight: 700; }
+  #script { flex: 1; margin: 8px 16px; padding: 14px; background: #141414; color: #eee;
+            border: 1px solid #333; border-radius: 12px; font-size: 16px; line-height: 1.5; resize: none; }
+  .controls { padding: 8px 16px calc(16px + env(safe-area-inset-bottom)); }
+  .row { display: flex; align-items: center; gap: 12px; margin: 10px 0; }
+  .row label { width: 84px; font-size: 14px; color: #aaa; }
+  .row input[type=range] { flex: 1; accent-color: #e53935; }
+  .row .val { width: 44px; text-align: right; font-size: 14px; color: #ddd; }
+  #startBtn { width: 100%; padding: 16px; margin-top: 6px; border: none; border-radius: 14px;
+              background: #e53935; color: #fff; font-size: 18px; font-weight: 700; }
+  .smallBtns { display: flex; gap: 10px; margin-top: 10px; }
+  .smallBtns button { flex: 1; padding: 10px; border-radius: 10px; border: 1px solid #444;
+                      background: #1a1a1a; color: #ddd; font-size: 14px; }
+  .smallBtns button.on { border-color: #e53935; color: #fff; }
+
+  /* ---------- Camera / prompter screen ---------- */
+  #stage { position: fixed; inset: 0; display: none; background: #000; }
+  #cam { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  #dim { position: absolute; inset: 0; background: rgba(0,0,0,0.55); }
+  #scrollWrap { position: absolute; inset: 0; overflow: hidden; }
+  #prompt { position: absolute; left: 0; right: 0; top: 100%;
+            padding: 0 7vw; text-align: center; color: #fff;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.9); white-space: pre-wrap; }
+  /* mirrored */
+  .mirrored #scrollWrap { transform: scaleX(-1); }
+
+  /* countdown */
+  #count { position: absolute; inset: 0; display: none; align-items: center; justify-content: center;
+           font-size: 28vw; font-weight: 800; color: #fff; text-shadow: 0 4px 24px rgba(0,0,0,0.8); z-index: 5; }
+
+  /* top bar while recording */
+  #topbar { position: absolute; top: 0; left: 0; right: 0; padding: calc(10px + env(safe-area-inset-top)) 14px 10px;
+            display: flex; align-items: center; gap: 10px; z-index: 6; }
+  #recDot { width: 12px; height: 12px; border-radius: 50%; background: #e53935; animation: blink 1s infinite; }
+  @keyframes blink { 50% { opacity: 0.25; } }
+  #timer { font-size: 16px; font-variant-numeric: tabular-nums; }
+
+  /* bottom controls */
+  #bottombar { position: absolute; bottom: 0; left: 0; right: 0;
+               padding: 12px 18px calc(18px + env(safe-area-inset-bottom)); z-index: 6;
+               display: flex; align-items: center; justify-content: space-between; }
+  #stopBtn { width: 72px; height: 72px; border-radius: 50%; border: 4px solid #fff;
+             background: #e53935; position: relative; }
+  #stopBtn::after { content: ""; position: absolute; inset: 18px; background: #fff; border-radius: 6px; }
+  .sideBtn { width: 52px; height: 52px; border-radius: 50%; border: 1px solid #666;
+             background: rgba(0,0,0,0.5); color: #fff; font-size: 20px; }
+  #speedSlider, #sizeSlider { width: 34vw; max-width: 170px; accent-color: #e53935; }
+
+  /* toast */
+  #toast { position: absolute; left: 50%; bottom: 120px; transform: translateX(-50%);
+           background: rgba(0,0,0,0.8); padding: 10px 18px; border-radius: 10px; font-size: 14px;
+           z-index: 9; display: none; }
+</style>
+</head>
+<body>
+
+<div id="editor">
+  <header>Teleprompter</header>
+  <textarea id="script" placeholder="Paste or type your script here (about 300 words takes 2–3 minutes at normal speed)..."></textarea>
+  <div class="controls">
+    <div class="row">
+      <label>Speed</label>
+      <input type="range" id="speed" min="10" max="200" value="70">
+      <span class="val" id="speedVal">70</span>
+    </div>
+    <div class="row">
+      <label>Text size</label>
+      <input type="range" id="size" min="18" max="72" value="36">
+      <span class="val" id="sizeVal">36</span>
+    </div>
+    <div class="smallBtns">
+      <button id="mirrorBtn">Mirror: Off</button>
+      <button id="cameraBtn">Camera: User</button>
+    </div>
+    <button id="startBtn">● Record &amp; Read</button>
+  </div>
+</div>
+
+<div id="stage">
+  <video id="cam" autoplay playsinline muted></video>
+  <div id="dim"></div>
+  <div id="scrollWrap"><div id="prompt"></div></div>
+  <div id="count"></div>
+  <div id="topbar">
+    <div id="recDot"></div><div id="timer">0:00</div>
+  </div>
+  <div id="bottombar">
+    <button class="sideBtn" id="pauseBtn" title="Pause scrolling">⏸</button>
+    <button id="stopBtn" title="Stop recording"></button>
+    <button class="sideBtn" id="cancelBtn" title="Cancel">✕</button>
+  </div>
+  <div id="toast"></div>
+</div>
+
+<script>
+(function () {
+  var scriptEl   = document.getElementById('script');
+  var speedEl    = document.getElementById('speed');
+  var sizeEl     = document.getElementById('size');
+  var speedVal   = document.getElementById('speedVal');
+  var sizeVal    = document.getElementById('sizeVal');
+  var stage      = document.getElementById('stage');
+  var cam        = document.getElementById('cam');
+  var promptEl   = document.getElementById('prompt');
+  var countEl    = document.getElementById('count');
+  var timerEl    = document.getElementById('timer');
+  var pauseBtn   = document.getElementById('pauseBtn');
+  var mirrorBtn  = document.getElementById('mirrorBtn');
+  var cameraBtn  = document.getElementById('cameraBtn');
+  var toastEl    = document.getElementById('toast');
+  var wakeLock   = null;
+  var facing     = 'user';
+
+  // --- persist script between sessions
+  try {
+    scriptEl.value = localStorage.getItem('tp_script') || '';
+    speedEl.value  = localStorage.getItem('tp_speed') || 70;
+    sizeEl.value   = localStorage.getItem('tp_size') || 36;
+    facing         = localStorage.getItem('tp_facing') || 'user';
+    updateLabels(); updateMirrorBtn(); updateCameraBtn();
+  } catch (e) {}
+  scriptEl.addEventListener('input', function () { try { localStorage.setItem('tp_script', scriptEl.value); } catch (e) {} });
+  speedEl.addEventListener('input', function () { updateLabels(); try { localStorage.setItem('tp_speed', speedEl.value); } catch (e) {} });
+  sizeEl.addEventListener('input', function () { updateLabels(); try { localStorage.setItem('tp_size', sizeEl.value); } catch (e) {} });
+
+  function updateLabels() {
+    speedVal.textContent = speedEl.value;
+    sizeVal.textContent = sizeEl.value;
+    promptEl.style.fontSize = sizeEl.value + 'px';
+    promptEl.style.lineHeight = 1.6;
+  }
+  function updateMirrorBtn() { mirrorBtn.textContent = 'Mirror: ' + (stage.classList.contains('mirrored') ? 'On' : 'Off'); mirrorBtn.classList.toggle('on', stage.classList.contains('mirrored')); }
+  function updateCameraBtn() { cameraBtn.textContent = 'Camera: ' + (facing === 'user' ? 'Front' : 'Back'); }
+
+  mirrorBtn.addEventListener('click', function () { stage.classList.toggle('mirrored'); updateMirrorBtn(); });
+  cameraBtn.addEventListener('click', function () { facing = facing === 'user' ? 'environment' : 'user'; updateCameraBtn(); try { localStorage.setItem('tp_facing', facing); } catch (e) {} });
+
+  function toast(msg, ms) {
+    toastEl.textContent = msg; toastEl.style.display = 'block';
+    setTimeout(function () { toastEl.style.display = 'none'; }, ms || 2500);
+  }
+
+  // ================= Start: camera -> countdown -> record -> scroll =================
+  var stream = null, recorder = null, chunks = [];
+  var scrolling = false, paused = false, scrollPos = 0, lastTs = 0;
+  var recStart = 0, timerInt = null;
+
+  document.getElementById('startBtn').addEventListener('click', start);
+  document.getElementById('stopBtn').addEventListener('click', stop);
+  document.getElementById('cancelBtn').addEventListener('click', cancel);
+  pauseBtn.addEventListener('click', function () {
+    paused = !paused;
+    pauseBtn.textContent = paused ? '▶' : '⏸';
+  });
+
+  async function start() {
+    var text = scriptEl.value.trim();
+    if (!text) { toast('Type or paste a script first'); return; }
+    if (!navigator.mediaDevices || !window.MediaRecorder) { toast('This browser cannot record video'); return; }
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: facing, width: { ideal: 1080 }, height: { ideal: 1920 } },
+        audio: true
+      });
+    } catch (err) {
+      toast('Camera/mic access denied: ' + err.name); return;
+    }
+    cam.srcObject = stream;
+
+    promptEl.textContent = text;
+    updateLabels();
+    scrollPos = 0;
+    promptEl.style.transform = 'translateY(0px)';
+    stage.style.display = 'block';
+    countEl.style.display = 'flex';
+
+    try { wakeLock = await navigator.wakeLock.request('screen'); } catch (e) {}
+
+    // 3 - 2 - 1 countdown
+    for (var n = 3; n >= 1; n--) {
+      countEl.textContent = n;
+      await sleep(1000);
+    }
+    countEl.style.display = 'none';
+
+    // begin recording
+    chunks = [];
+    var mime = pickMime();
+    recorder = new MediaRecorder(stream, mime ? { mimeType: mime } : undefined);
+    recorder.ondataavailable = function (e) { if (e.data.size) chunks.push(e.data); };
+    recorder.onstop = saveVideo;
+    recorder.start(1000);
+
+    recStart = Date.now();
+    timerInt = setInterval(function () {
+      var s = Math.floor((Date.now() - recStart) / 1000);
+      timerEl.textContent = Math.floor(s / 60) + ':' + ('0' + s % 60).slice(-2);
+    }, 250);
+
+    scrolling = true; paused = false; pauseBtn.textContent = '⏸';
+    lastTs = 0;
+    requestAnimationFrame(tick);
+  }
+
+  function pickMime() {
+    var candidates = ['video/mp4;codecs=avc1', 'video/mp4', 'video/webm;codecs=vp9,opus', 'video/webm;codecs=vp8,opus', 'video/webm'];
+    for (var i = 0; i < candidates.length; i++) {
+      if (MediaRecorder.isTypeSupported(candidates[i])) return candidates[i];
+    }
+    return '';
+  }
+
+  function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+  // smooth, frame-rate-independent scrolling.
+  // slider 10..200  ->  roughly 5..100 px per second at typical font sizes
+  function tick(ts) {
+    if (!scrolling) return;
+    requestAnimationFrame(tick);
+    if (paused || !lastTs) { lastTs = ts; return; }
+    var dt = (ts - lastTs) / 1000;
+    lastTs = ts;
+    scrollPos += Number(speedEl.value) * dt;
+    promptEl.style.transform = 'translateY(' + (-scrollPos) + 'px)';
+    // stop everything once the text has fully scrolled past
+    if (scrollPos > promptEl.offsetHeight + window.innerHeight * 0.5) stop();
+  }
+
+  async function teardown() {
+    scrolling = false; paused = false;
+    clearInterval(timerInt);
+    if (wakeLock) { try { wakeLock.release(); } catch (e) {} wakeLock = null; }
+    if (stream) { stream.getTracks().forEach(function (t) { t.stop(); }); stream = null; }
+    cam.srcObject = null;
+    stage.style.display = 'none';
+    countEl.style.display = 'none';
+  }
+
+  function stop() {
+    if (recorder && recorder.state !== 'inactive') recorder.stop();
+    else { teardown(); return; }
+    teardown();
+  }
+
+  function cancel() {
+    recorder = null; // discard recording
+    if (recorder) {}
+    teardown();
+    toast('Cancelled');
+  }
+
+  function saveVideo() {
+    if (!chunks.length) return;
+    var blob = new Blob(chunks, { type: chunks[0].type || 'video/webm' });
+    var ext = (blob.type.indexOf('mp4') !== -1) ? 'mp4' : 'webm';
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'teleprompter-' + new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19) + '.' + ext;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 5000);
+    toast('Saved to your downloads / Files');
+  }
+})();
+</script>
+</body>
+</html>

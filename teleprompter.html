@@ -74,16 +74,16 @@
 
 <div id="editor">
   <header><img src="rabbit-logo-icon.png" alt="">Teleprompter</header>
-  <textarea id="script" placeholder="Paste or type your script here (about 300 words takes 2–3 minutes at normal speed)..."></textarea>
+  <textarea id="script" placeholder="Paste your script here..."></textarea>
   <div class="controls">
     <div class="row">
       <label>Speed</label>
-      <input type="range" id="speed" min="10" max="200" value="70">
+      <input type="range" id="speed" min="10" max="200" value="80">
       <span class="val" id="speedVal">70</span>
     </div>
     <div class="row">
       <label>Text size</label>
-      <input type="range" id="size" min="18" max="72" value="36">
+      <input type="range" id="size" min="18" max="72" value="30">
       <span class="val" id="sizeVal">36</span>
     </div>
     <div class="smallBtns">
@@ -130,10 +130,16 @@
   var facing     = 'user';
 
   // --- persist script between sessions
+  var DEFAULT_SCRIPT = '45 seconds starting with "Hey, Watermelon..." — not rushed, with a slight pause after you say it.\n\nEnsure you have plenty of light and don\'t use an artificial background.';
   try {
-    scriptEl.value = localStorage.getItem('tp_script') || '';
-    speedEl.value  = localStorage.getItem('tp_speed') || 70;
-    sizeEl.value   = localStorage.getItem('tp_size') || 36;
+    // settings version: bump to force old saved values back to new defaults
+    if (localStorage.getItem('tp_v') !== '2') {
+      localStorage.removeItem('tp_script'); localStorage.removeItem('tp_speed'); localStorage.removeItem('tp_size');
+      localStorage.setItem('tp_v', '2');
+    }
+    scriptEl.value = localStorage.getItem('tp_script') || DEFAULT_SCRIPT;
+    speedEl.value  = localStorage.getItem('tp_speed') || 80;
+    sizeEl.value   = localStorage.getItem('tp_size') || 30;
     facing         = localStorage.getItem('tp_facing') || 'user';
     updateLabels(); updateMirrorBtn(); updateCameraBtn();
   } catch (e) {}

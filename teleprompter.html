@@ -6,13 +6,17 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <title>Teleprompter</title>
+<link rel="icon" type="image/png" href="rabbit-logo-icon.png">
+<link rel="apple-touch-icon" href="rabbit-logo-icon.png">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body { height: 100%; background: #000; color: #fff; font-family: -apple-system, "Segoe UI", Roboto, sans-serif; overflow: hidden; }
 
   /* ---------- Edit screen ---------- */
   #editor { height: 100%; display: flex; flex-direction: column; }
-  #editor header { padding: 14px 16px 8px; font-size: 20px; font-weight: 700; }
+  #editor header { padding: 14px 16px 8px; font-size: 20px; font-weight: 700;
+                   display: flex; align-items: center; gap: 10px; }
+  #editor header img { width: 34px; height: 34px; border-radius: 8px; }
   #script { flex: 1; margin: 8px 16px; padding: 14px; background: #141414; color: #eee;
             border: 1px solid #333; border-radius: 12px; font-size: 16px; line-height: 1.5; resize: none; }
   .controls { padding: 8px 16px calc(16px + env(safe-area-inset-bottom)); }
@@ -69,7 +73,7 @@
 <body>
 
 <div id="editor">
-  <header>Teleprompter</header>
+  <header><img src="rabbit-logo-icon.png" alt="">Teleprompter</header>
   <textarea id="script" placeholder="Paste or type your script here (about 300 words takes 2–3 minutes at normal speed)..."></textarea>
   <div class="controls">
     <div class="row">

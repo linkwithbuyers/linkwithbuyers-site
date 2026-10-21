@@ -130,12 +130,12 @@
   var facing     = 'user';
 
   // --- persist script between sessions
-  var DEFAULT_SCRIPT = '45 seconds starting with "Hey, Watermelon..." — not rushed, with a slight pause after you say it.\n\nEnsure you have plenty of light and don\'t use an artificial background.';
+  var DEFAULT_SCRIPT = 'Quick Guidelines...\n\nLimit your video to 45 seconds. Start with "Hey, Watermelon..." — not rushed, with a slight pause after you say it.\n\nEnsure you have plenty of light and don\'t use an artificial background.';
   try {
     // settings version: bump to force old saved values back to new defaults
-    if (localStorage.getItem('tp_v') !== '2') {
+    if (localStorage.getItem('tp_v') !== '3') {
       localStorage.removeItem('tp_script'); localStorage.removeItem('tp_speed'); localStorage.removeItem('tp_size');
-      localStorage.setItem('tp_v', '2');
+      localStorage.setItem('tp_v', '3');
     }
     scriptEl.value = localStorage.getItem('tp_script') || DEFAULT_SCRIPT;
     speedEl.value  = localStorage.getItem('tp_speed') || 80;

@@ -193,9 +193,8 @@
     if (!navigator.mediaDevices || !window.MediaRecorder) { toast('This browser cannot record video'); return; }
     try {
       stream = await navigator.mediaDevices.getUserMedia({
-        // no size constraints: phones deliver their widest field of view by default,
-        // whereas tall portrait ideals can trigger a digitally-zoomed crop mode
-        video: { facingMode: facing },
+        // high-res landscape maps to the camera's full wide sensor mode on most phones
+        video: { facingMode: facing, width: { ideal: 1920 }, height: { ideal: 1080 } },
         audio: true
       });
     } catch (err) {

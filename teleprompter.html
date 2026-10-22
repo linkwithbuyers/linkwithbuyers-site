@@ -283,14 +283,28 @@
     toast('Cancelled');
   }
 
-  function saveVideo() {
+  async function saveVideo() {
     if (!chunks.length) return;
     var blob = new Blob(chunks, { type: chunks[0].type || 'video/webm' });
     var ext = (blob.type.indexOf('mp4') !== -1) ? 'mp4' : 'webm';
+    var name = 'teleprompter-' + new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19) + '.' + ext;
+    // preferred path: share sheet -> "Save to Photos" / "Save to Gallery"
+    var file = new File([blob], name, { type: blob.type });
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      try {
+        await navigator.share({ files: [file], title: 'Teleprompter video' });
+        toast('Saved via share sheet');
+        return;
+      } catch (e) {
+        if (e.name === 'AbortError') return; // user dismissed the sheet
+        // fall through to download
+      }
+    }
+    // fallback: download to Files/Downloads
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
     a.href = url;
-    a.download = 'teleprompter-' + new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19) + '.' + ext;
+    a.download = name;
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(function () { URL.revokeObjectURL(url); }, 5000);
     toast('Saved to your downloads / Files');

@@ -62,6 +62,10 @@
   #stopBtn::after { content: ""; position: absolute; inset: 18px; background: #fff; border-radius: 6px; }
   .sideBtn { width: 52px; height: 52px; border-radius: 50%; border: 1px solid #666;
              background: rgba(0,0,0,0.5); color: #fff; font-size: 20px; }
+  .pauseBtn { position: absolute; top: 50%; transform: translateY(-50%);
+              width: 72px; height: 72px; font-size: 30px; z-index: 6; }
+  #pauseLeft { left: 14px; }
+  #pauseRight { right: 14px; }
   #speedSlider, #sizeSlider { width: 34vw; max-width: 170px; accent-color: #e53935; }
 
   /* toast */
@@ -103,10 +107,11 @@
     <div id="recDot"></div><div id="timer">0:00</div>
   </div>
   <div id="bottombar">
-    <button class="sideBtn" id="pauseBtn" title="Pause scrolling">⏸</button>
-    <button id="stopBtn" title="Stop recording"></button>
     <button class="sideBtn" id="cancelBtn" title="Cancel">✕</button>
+    <button id="stopBtn" title="Stop recording"></button>
   </div>
+  <button class="sideBtn pauseBtn" id="pauseLeft" title="Pause scrolling">⏸</button>
+  <button class="sideBtn pauseBtn" id="pauseRight" title="Pause scrolling">⏸</button>
   <div id="toast"></div>
 </div>
 
@@ -122,7 +127,7 @@
   var promptEl   = document.getElementById('prompt');
   var countEl    = document.getElementById('count');
   var timerEl    = document.getElementById('timer');
-  var pauseBtn   = document.getElementById('pauseBtn');
+  var pauseBtns  = [document.getElementById('pauseLeft'), document.getElementById('pauseRight')];
   var mirrorBtn  = document.getElementById('mirrorBtn');
   var cameraBtn  = document.getElementById('cameraBtn');
   var toastEl    = document.getElementById('toast');
@@ -172,9 +177,14 @@
   document.getElementById('startBtn').addEventListener('click', start);
   document.getElementById('stopBtn').addEventListener('click', stop);
   document.getElementById('cancelBtn').addEventListener('click', cancel);
-  pauseBtn.addEventListener('click', function () {
-    paused = !paused;
-    pauseBtn.textContent = paused ? '▶' : '⏸';
+  function setPauseIcons() {
+    pauseBtns.forEach(function (b) { b.textContent = paused ? '▶' : '⏸'; });
+  }
+  pauseBtns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      paused = !paused;
+      setPauseIcons();
+    });
   });
 
   async function start() {
@@ -221,7 +231,7 @@
       timerEl.textContent = Math.floor(s / 60) + ':' + ('0' + s % 60).slice(-2);
     }, 250);
 
-    scrolling = true; paused = false; pauseBtn.textContent = '⏸';
+    scrolling = true; paused = false; setPauseIcons();
     lastTs = 0;
     requestAnimationFrame(tick);
   }

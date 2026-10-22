@@ -295,8 +295,6 @@
     lastTs = ts;
     scrollPos += Number(speedEl.value) * dt;
     promptEl.style.transform = 'translateY(' + (-scrollPos) + 'px)';
-    // stop everything once the text has fully scrolled past
-    if (scrollPos > promptEl.offsetHeight + window.innerHeight * 0.5) stop();
   }
 
   async function teardown() {
@@ -310,43 +308,51 @@
   }
 
   function stop() {
-    if (recorder && recorder.state !== 'inactive') recorder.stop();
-    else { teardown(); return; }
-    teardown();
+    if (recorder && recorder.state !== 'inactive') {
+      // let the recorder flush its final data BEFORE we release the camera
+      recorder.onstop = function () { saveVideo(); };
+      recorder.stop();
+    } else {
+      teardown();
+    }
   }
 
   function cancel() {
-    recorder = null; // discard recording
-    if (recorder) {}
-    teardown();
-    toast('Cancelled');
+    if (recorder && recorder.state !== 'inactive') {
+      recorder.onstop = function () { teardown(); toast('Cancelled'); };
+      recorder.stop();
+    } else {
+      teardown(); toast('Cancelled');
+    }
   }
 
   async function saveVideo() {
-    if (!chunks.length) return;
-    var blob = new Blob(chunks, { type: chunks[0].type || 'video/webm' });
+    var blob = new Blob(chunks, { type: chunks.length ? chunks[0].type : 'video/webm' });
     var ext = (blob.type.indexOf('mp4') !== -1) ? 'mp4' : 'webm';
     var name = 'teleprompter-' + new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19) + '.' + ext;
+    var saved = false;
     // preferred path: share sheet -> "Save to Photos" / "Save to Gallery"
-    var file = new File([blob], name, { type: blob.type });
-    if (navigator.canShare && navigator.canShare({ files: [file] })) {
-      try {
+    try {
+      var file = new File([blob], name, { type: blob.type });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
         await navigator.share({ files: [file], title: 'Teleprompter video' });
-        toast('Saved via share sheet');
-        return;
-      } catch (e) {
-        if (e.name === 'AbortError') return; // user dismissed the sheet
-        // fall through to download
+        saved = true;
       }
+    } catch (e) {
+      if (e.name === 'AbortError') { teardown(); return; } // user dismissed the sheet
+      // anything else: fall through to download
     }
-    // fallback: download to Files/Downloads
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = name;
-    document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(function () { URL.revokeObjectURL(url); }, 5000);
-    toast('Saved to your downloads / Files');
+    if (!saved) {
+      // fallback: download to Files/Downloads
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = name;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 5000);
+      toast('Saved to your downloads / Files');
+    }
+    teardown();
   }
 })();
 </script>

@@ -201,6 +201,11 @@
     }
     cam.srcObject = stream;
 
+    // wait for video metadata so we know real frame dimensions
+    if (cam.readyState < 1) {
+      await new Promise(function (r) { cam.onloadedmetadata = r; });
+    }
+
     promptEl.textContent = text;
     updateLabels();
     scrollPos = 0;
@@ -217,10 +222,14 @@
     }
     countEl.style.display = 'none';
 
-    // begin recording
+    // begin recording.
+    // Mobile cameras deliver landscape sensor frames and MediaRecorder doesn't
+    // always apply portrait rotation, so composite into a portrait canvas and
+    // record the canvas stream instead of the raw camera stream.
     chunks = [];
+    var recStream = buildPortraitStream();
     var mime = pickMime();
-    recorder = new MediaRecorder(stream, mime ? { mimeType: mime } : undefined);
+    recorder = new MediaRecorder(recStream, mime ? { mimeType: mime } : undefined);
     recorder.ondataavailable = function (e) { if (e.data.size) chunks.push(e.data); };
     recorder.onstop = saveVideo;
     recorder.start(1000);
@@ -246,11 +255,49 @@
 
   function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
 
+  // --- portrait recording canvas ---
+  var recCanvas = document.createElement('canvas');
+  var recCtx = recCanvas.getContext('2d');
+
+  function buildPortraitStream() {
+    var vw = cam.videoWidth || 1080, vh = cam.videoHeight || 1920;
+    var w = Math.min(vw, vh), h = Math.max(vw, vh);
+    var cap = 1280;
+    if (h > cap) { w = Math.round(w * cap / h); h = cap; }
+    // keep dimensions even (some encoders require it)
+    w -= w % 2; h -= h % 2;
+    recCanvas.width = w; recCanvas.height = h;
+    drawFrame();
+    var cs = recCanvas.captureStream(30);
+    stream.getAudioTracks().forEach(function (t) { cs.addTrack(t); });
+    return cs;
+  }
+
+  // draw the camera frame onto the portrait canvas, cover-cropped, upright
+  function drawFrame() {
+    var vw = cam.videoWidth, vh = cam.videoHeight;
+    if (!vw || !vh) return;
+    var cw = recCanvas.width, ch = recCanvas.height;
+    // if the source frame is landscape, rotate it 90deg into portrait
+    recCtx.save();
+    if (vw > vh) {
+      recCtx.translate(cw, 0);
+      recCtx.rotate(Math.PI / 2);
+      recCtx.drawImage(cam, 0, 0, vh, vw); // draw into rotated space (ch x cw)
+    } else {
+      var s = Math.max(cw / vw, ch / vh);
+      var dw = vw * s, dh = vh * s;
+      recCtx.drawImage(cam, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
+    }
+    recCtx.restore();
+  }
+
   // smooth, frame-rate-independent scrolling.
   // slider 10..200  ->  roughly 5..100 px per second at typical font sizes
   function tick(ts) {
     if (!scrolling) return;
     requestAnimationFrame(tick);
+    if (recorder && recorder.state === 'recording') drawFrame();
     if (paused || !lastTs) { lastTs = ts; return; }
     var dt = (ts - lastTs) / 1000;
     lastTs = ts;

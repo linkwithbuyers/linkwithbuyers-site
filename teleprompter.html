@@ -273,23 +273,15 @@
     return cs;
   }
 
-  // draw the camera frame onto the portrait canvas, cover-cropped, upright
+  // draw the camera frame onto the portrait canvas, center-cropped to fill.
+  // (frames arrive upright from the phone camera — no rotation needed)
   function drawFrame() {
     var vw = cam.videoWidth, vh = cam.videoHeight;
     if (!vw || !vh) return;
     var cw = recCanvas.width, ch = recCanvas.height;
-    // if the source frame is landscape, rotate it 90deg into portrait
-    recCtx.save();
-    if (vw > vh) {
-      recCtx.translate(cw, 0);
-      recCtx.rotate(Math.PI / 2);
-      recCtx.drawImage(cam, 0, 0, vh, vw); // draw into rotated space (ch x cw)
-    } else {
-      var s = Math.max(cw / vw, ch / vh);
-      var dw = vw * s, dh = vh * s;
-      recCtx.drawImage(cam, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
-    }
-    recCtx.restore();
+    var s = Math.max(cw / vw, ch / vh);
+    var dw = vw * s, dh = vh * s;
+    recCtx.drawImage(cam, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
   }
 
   // smooth, frame-rate-independent scrolling.

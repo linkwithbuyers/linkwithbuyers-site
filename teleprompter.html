@@ -116,6 +116,10 @@
 </div>
 
 <script>
+// camera access requires a secure origin — bounce plain HTTP to HTTPS
+if (location.protocol === 'http:') {
+  location.replace('https://' + location.host + location.pathname + location.search);
+}
 (function () {
   var scriptEl   = document.getElementById('script');
   var speedEl    = document.getElementById('speed');
@@ -190,6 +194,11 @@
   async function start() {
     var text = scriptEl.value.trim();
     if (!text) { toast('Type or paste a script first'); return; }
+    if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+      toast('Camera needs a secure (https) connection — reloading over https...');
+      location.replace('https://' + location.host + location.pathname + location.search);
+      return;
+    }
     if (!navigator.mediaDevices || !window.MediaRecorder) { toast('This browser cannot record video'); return; }
     try {
       stream = await navigator.mediaDevices.getUserMedia({
@@ -198,13 +207,19 @@
         audio: true
       });
     } catch (err) {
-      toast('Camera/mic access denied: ' + err.name); return;
+      var why = err.name === 'NotAllowedError' ? 'permission denied — allow camera & mic in Settings'
+              : err.name === 'NotFoundError' ? 'no camera found'
+              : err.name;
+      toast('Camera problem: ' + why, 5000); return;
     }
     cam.srcObject = stream;
 
-    // wait for video metadata so we know real frame dimensions
+    // wait for video metadata so we know real frame dimensions (bail out after 5s)
     if (cam.readyState < 1) {
-      await new Promise(function (r) { cam.onloadedmetadata = r; });
+      await new Promise(function (r) {
+        var to = setTimeout(r, 5000);
+        cam.onloadedmetadata = function () { clearTimeout(to); r(); };
+      });
     }
 
     promptEl.textContent = text;

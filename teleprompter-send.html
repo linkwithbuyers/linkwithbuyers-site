@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Prepare a Script</title>
+<link rel="icon" type="image/png" href="rabbit-icon-clean.png">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { min-height: 100%; background: #0d0d0d; color: #fff;
+               font-family: -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 20px 18px calc(40px + env(safe-area-inset-bottom)); }
+  header { display: flex; align-items: center; gap: 10px; padding: 6px 0 14px; }
+  header img { width: 38px; height: 38px; border-radius: 8px; }
+  header h1 { font-size: 22px; }
+  .hint { color: #aaa; font-size: 14px; line-height: 1.5; margin-bottom: 14px; }
+  label { display: block; font-size: 13px; color: #aaa; margin: 16px 0 6px; }
+  input, textarea { width: 100%; padding: 12px 14px; background: #1a1a1a; color: #eee;
+                    border: 1px solid #333; border-radius: 10px; font-size: 16px; }
+  textarea { min-height: 220px; resize: vertical; line-height: 1.5; }
+  button.primary { width: 100%; margin-top: 18px; padding: 16px; border: none; border-radius: 12px;
+                   background: #5a43d6; color: #fff; font-size: 17px; font-weight: 700; }
+  button.primary:disabled { opacity: 0.5; }
+  #result { display: none; margin-top: 22px; padding: 16px; background: #171717;
+            border: 1px solid #2e2e2e; border-radius: 12px; }
+  #result h2 { font-size: 16px; margin-bottom: 10px; }
+  #link { word-break: break-all; font-size: 13px; color: #8fb8ff; background: #10131a;
+          padding: 10px; border-radius: 8px; margin-bottom: 12px; }
+  .btnrow { display: flex; gap: 10px; }
+  .btnrow a, .btnrow button { flex: 1; text-align: center; padding: 13px 8px; border-radius: 10px;
+                              font-size: 15px; font-weight: 600; text-decoration: none;
+                              border: 1px solid #444; background: #222; color: #fff; }
+  .btnrow a { background: #5a43d6; border-color: #5a43d6; }
+  .ok { color: #7ddb8a; font-size: 14px; margin-top: 10px; display: none; }
+  .steps { margin-top: 26px; color: #888; font-size: 13px; line-height: 1.7; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><img src="rabbit-icon-clean.png" alt=""><h1>Prepare a Script</h1></header>
+  <p class="hint">Paste a script here to create a private link. Opening that link on any phone launches the teleprompter with this script already loaded — no copying and pasting on the phone needed.</p>
+
+  <label for="client">Client or video name (optional)</label>
+  <input id="client" type="text" placeholder="e.g. Abby Meeks intro video">
+
+  <label for="script">Script</label>
+  <textarea id="script" placeholder="Paste the script here..."></textarea>
+
+  <button class="primary" id="makeBtn">Create My Link</button>
+
+  <div id="result">
+    <h2>Your link is ready</h2>
+    <div id="link"></div>
+    <div class="btnrow">
+      <button id="copyBtn">Copy Link</button>
+      <a id="openBtn" target="_blank" rel="noopener">Open It</a>
+      <a id="mailBtn" target="_blank" rel="noopener">Email It</a>
+    </div>
+    <p class="ok" id="copied">Copied to clipboard ✓</p>
+  </div>
+
+  <p class="steps">
+    Tip: "Email It" opens a draft with the link in it — send it to yourself, then open it on your phone and record.
+    The link only contains the script you see above; nothing is stored on our servers.
+  </p>
+</div>
+
+<script>
+(function () {
+  var clientEl = document.getElementById('client');
+  var scriptEl = document.getElementById('script');
+  var makeBtn  = document.getElementById('makeBtn');
+  var resultEl = document.getElementById('result');
+  var linkEl   = document.getElementById('link');
+  var copyBtn  = document.getElementById('copyBtn');
+  var openBtn  = document.getElementById('openBtn');
+  var mailBtn  = document.getElementById('mailBtn');
+  var copiedEl = document.getElementById('copied');
+  var madeUrl  = '';
+
+  function b64url(str) {
+    var bytes = new TextEncoder().encode(str);
+    var bin = '';
+    for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+    return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+
+  makeBtn.addEventListener('click', function () {
+    var text = scriptEl.value.trim();
+    if (!text) { alert('Paste a script first'); return; }
+    var base = 'https://linkwithbuyers.com/teleprompter.html';
+    var url = base + '?s=' + b64url(text);
+    if (clientEl.value.trim()) url += '&c=' + encodeURIComponent(clientEl.value.trim());
+    madeUrl = url;
+    linkEl.textContent = url;
+    openBtn.href = url;
+    mailBtn.href = 'mailto:?subject=' +
+      encodeURIComponent('Your teleprompter script' + (clientEl.value.trim() ? ' — ' + clientEl.value.trim() : '')) +
+      '&body=' + encodeURIComponent('Open this link on your phone — the script is already loaded:\n\n' + url);
+    resultEl.style.display = 'block';
+    copiedEl.style.display = 'none';
+    resultEl.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  copyBtn.addEventListener('click', function () {
+    navigator.clipboard.writeText(madeUrl).then(function () {
+      copiedEl.style.display = 'block';
+    }, function () {
+      // clipboard API can be blocked — select the text instead
+      var r = document.createRange(); r.selectNodeContents(linkEl);
+      var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+      document.execCommand('copy');
+      copiedEl.style.display = 'block';
+    });
+  });
+})();
+</script>
+</body>
+</html>

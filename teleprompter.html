@@ -152,6 +152,29 @@ if (location.protocol === 'http:') {
     facing         = localStorage.getItem('tp_facing') || 'user';
     updateLabels(); updateMirrorBtn(); updateCameraBtn();
   } catch (e) {}
+
+  // --- script links: ?s=<base64url script>&c=<client name> (from teleprompter-send.html)
+  try {
+    var qs = new URLSearchParams(location.search);
+    if (qs.get('s')) {
+      var b64 = qs.get('s').replace(/-/g, '+').replace(/_/g, '/');
+      while (b64.length % 4) b64 += '=';
+      var bin = atob(b64);
+      var bytes = new Uint8Array(bin.length);
+      for (var bi = 0; bi < bin.length; bi++) bytes[bi] = bin.charCodeAt(bi);
+      var linked = new TextDecoder().decode(bytes);
+      if (linked.trim()) {
+        scriptEl.value = linked;
+        try { localStorage.setItem('tp_script', linked); } catch (e) {}
+      }
+    }
+    if (qs.get('c')) {
+      var hdr = document.querySelector('#editor header');
+      var name = qs.get('c');
+      hdr.lastChild.textContent = 'Teleprompter — ' + name;
+      document.title = 'Teleprompter — ' + name;
+    }
+  } catch (e) {}
   scriptEl.addEventListener('input', function () { try { localStorage.setItem('tp_script', scriptEl.value); } catch (e) {} });
   speedEl.addEventListener('input', function () { updateLabels(); try { localStorage.setItem('tp_speed', speedEl.value); } catch (e) {} });
   sizeEl.addEventListener('input', function () { updateLabels(); try { localStorage.setItem('tp_size', sizeEl.value); } catch (e) {} });

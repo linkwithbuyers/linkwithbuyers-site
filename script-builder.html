@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Script Builder</title>
+<link rel="icon" type="image/png" href="rabbit-icon-clean.png">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { min-height: 100%; background: #0d0d0d; color: #fff;
+               font-family: -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 20px 18px calc(40px + env(safe-area-inset-bottom)); }
+  header { display: flex; align-items: center; gap: 10px; padding: 6px 0 14px; }
+  header img { width: 38px; height: 38px; border-radius: 8px; }
+  header h1 { font-size: 22px; }
+  .hint { color: #aaa; font-size: 14px; line-height: 1.5; margin-bottom: 8px; }
+  fieldset { border: none; margin-top: 18px; }
+  legend { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+           color: #8f7ae8; margin-bottom: 10px; }
+  label { display: block; font-size: 13px; color: #aaa; margin: 12px 0 5px; line-height: 1.4; }
+  input, textarea { width: 100%; padding: 11px 13px; background: #1a1a1a; color: #eee;
+                    border: 1px solid #333; border-radius: 10px; font-size: 16px; }
+  textarea { min-height: 70px; resize: vertical; line-height: 1.45; }
+  input:focus, textarea:focus { outline: none; border-color: #5a43d6; }
+  .ex { color: #666; font-size: 12px; margin-top: 4px; }
+  button.primary { width: 100%; margin-top: 24px; padding: 16px; border: none; border-radius: 12px;
+                   background: #5a43d6; color: #fff; font-size: 17px; font-weight: 700; }
+  #out { display: none; margin-top: 26px; }
+  #out h2 { font-size: 17px; margin-bottom: 10px; }
+  #script { width: 100%; min-height: 320px; padding: 14px; background: #171717; color: #eee;
+            border: 1px solid #2e2e2e; border-radius: 12px; font-size: 15px; line-height: 1.6; }
+  .btnrow { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+  .btnrow a, .btnrow button { flex: 1; min-width: 140px; text-align: center; padding: 13px 8px;
+                              border-radius: 10px; font-size: 15px; font-weight: 600;
+                              text-decoration: none; border: 1px solid #444; background: #222; color: #fff; }
+  .btnrow a { background: #5a43d6; border-color: #5a43d6; }
+  .ok { color: #7ddb8a; font-size: 14px; margin-top: 10px; display: none; }
+  .missing { color: #ffb84d; font-size: 13px; margin-top: 12px; display: none; line-height: 1.5; }
+  .re { margin-top: 14px; text-align: center; }
+  .re button { background: none; border: none; color: #888; font-size: 14px; text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><img src="rabbit-icon-clean.png" alt=""><h1>Script Builder</h1></header>
+  <p class="hint">Answer these questions about what you do <b>different and better</b> than your competitors. We'll turn them into a video script that covers the <b>Feature</b>, the <b>Advantage</b>, and the <b>Benefit</b> — the same structure that works in your best outreach videos.</p>
+
+  <fieldset>
+    <legend>The basics</legend>
+    <label>Your first name</label>
+    <input id="myName" type="text" placeholder="John">
+    <label>Company name</label>
+    <input id="company" type="text" placeholder="Solve">
+  </fieldset>
+
+  <fieldset>
+    <legend>Feature — what you do / offer</legend>
+    <label>What do you help businesses do? (one sentence, plain words)</label>
+    <textarea id="feature" placeholder="build extensions of their workforce in Latin America"></textarea>
+  </fieldset>
+
+  <fieldset>
+    <legend>Advantage — why that's better</legend>
+    <label>What measurable result does that typically get? (the number sells)</label>
+    <textarea id="advantage" placeholder="saves them about 40 to 60 percent on labor costs"></textarea>
+    <label>What stays the same for them? (removes the fear of switching)</label>
+    <textarea id="sameness" placeholder="We maintain your current culture and systems. We don't change any of that."></textarea>
+    <label>What's your scale or credential? (years, countries, clients...)</label>
+    <textarea id="scale" placeholder="We operate in 18 different countries, so we can find you the best talent on a global scale."></textarea>
+  </fieldset>
+
+  <fieldset>
+    <legend>Benefit — what it means for them</legend>
+    <label>What can they do with that result? (reinvest, grow, win back time...)</label>
+    <textarea id="benefit" placeholder="that they can then reinvest back into their A players here in the States, back into growth"></textarea>
+  </fieldset>
+
+  <button class="primary" id="buildBtn">Build My Script</button>
+  <p class="missing" id="missing"></p>
+
+  <div id="out">
+    <h2>Your script (edit anything you like)</h2>
+    <textarea id="script"></textarea>
+    <div class="btnrow">
+      <a id="teleBtn" target="_blank" rel="noopener">Open in Teleprompter</a>
+      <button id="copyBtn">Copy Script</button>
+      <button id="linkBtn">Create Phone Link</button>
+    </div>
+    <p class="ok" id="copied"></p>
+    <p class="re"><button id="editBtn">← Back to questions</button></p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var F = ['myName','company','feature','advantage','sameness','scale','benefit'];
+  F.forEach(function (id) {
+    var el = document.getElementById(id);
+    try { el.value = localStorage.getItem('sb_' + id) || ''; } catch (e) {}
+    el.addEventListener('input', function () { try { localStorage.setItem('sb_' + id, el.value); } catch (e) {} });
+  });
+  function v(id) { return document.getElementById(id).value.trim(); }
+
+  function build() {
+    var me = v('myName') || 'there';
+    var co = v('company') || 'our team';
+    var feat = v('feature');
+    var adv = v('advantage');
+    var same = v('sameness');
+    var scale = v('scale');
+    var ben = v('benefit');
+
+    var missing = [];
+    if (!feat) missing.push('what you do (Feature)');
+    if (!adv) missing.push('your measurable result (Advantage)');
+    if (!ben) missing.push('what they can do with it (Benefit)');
+    if (missing.length) {
+      var m = document.getElementById('missing');
+      m.textContent = 'Add these for the strongest script: ' + missing.join(', ') + '.';
+      m.style.display = 'block';
+    } else {
+      document.getElementById('missing').style.display = 'none';
+    }
+
+    var p = [];
+    p.push("Hey, hope you're having a fantastic start to your day. Thank you so much for the connection.");
+    p.push("I'll cut to the chase. The reason for the video is because I help businesses " + feat + ".");
+    if (adv) p.push("This typically " + adv + (ben ? ", " + ben : "") + ".");
+    if (same) p.push(same);
+    if (scale) p.push(scale);
+    p.push("If this is something you guys would be interested in, or that you are exploring currently, I'd love an opportunity to talk to you about how " + co + " can be a partner and resource for you. If not, thanks again for the connection, and I hope you have a fantastic rest of your day. Take care. Bye.");
+    return p.join(' ').replace(/\s+/g, ' ').trim();
+  }
+
+  function b64url(str) {
+    var bytes = new TextEncoder().encode(str);
+    var bin = '';
+    for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+    return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+
+  document.getElementById('buildBtn').addEventListener('click', function () {
+    var text = build();
+    document.getElementById('script').value = text;
+    refreshLinks(text);
+    document.getElementById('out').style.display = 'block';
+    document.getElementById('copied').style.display = 'none';
+    document.getElementById('out').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  function refreshLinks(text) {
+    var me = v('myName');
+    var base = 'https://linkwithbuyers.com/teleprompter.html';
+    var url = base + '?s=' + b64url(text);
+    if (me) url += '&c=' + encodeURIComponent(me);
+    document.getElementById('teleBtn').href = url;
+    document.getElementById('teleBtn').dataset.url = url;
+  }
+
+  document.getElementById('script').addEventListener('input', function () {
+    refreshLinks(this.value);
+  });
+
+  document.getElementById('copyBtn').addEventListener('click', function () {
+    var t = document.getElementById('script').value;
+    var ok = document.getElementById('copied');
+    navigator.clipboard.writeText(t).then(show, fallback);
+    function show() { ok.textContent = 'Copied ✓'; ok.style.display = 'block'; }
+    function fallback() {
+      var el = document.getElementById('script'); el.select();
+      document.execCommand('copy'); show();
+    }
+  });
+
+  document.getElementById('linkBtn').addEventListener('click', function () {
+    var url = document.getElementById('teleBtn').dataset.url;
+    var ok = document.getElementById('copied');
+    navigator.clipboard.writeText(url).then(show, fallback);
+    function show() { ok.textContent = 'Phone link copied ✓ — paste it in a text or email'; ok.style.display = 'block'; }
+    function fallback() {
+      window.prompt('Copy this link:', url);
+    }
+  });
+
+  document.getElementById('editBtn').addEventListener('click', function () {
+    document.getElementById('out').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>

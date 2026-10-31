@@ -66,8 +66,6 @@
     <textarea id="advantage" placeholder="saves them about 40 to 60 percent on labor costs"></textarea>
     <label>What stays the same for them? (removes the fear of switching)</label>
     <textarea id="sameness" placeholder="We maintain your current culture and systems. We don't change any of that."></textarea>
-    <label>What's your scale or credential? (years, countries, clients...)</label>
-    <textarea id="scale" placeholder="We operate in 18 different countries, so we can find you the best talent on a global scale."></textarea>
   </fieldset>
 
   <fieldset>
@@ -94,7 +92,7 @@
 
 <script>
 (function () {
-  var F = ['myName','company','feature','advantage','sameness','scale','benefit'];
+  var F = ['myName','company','feature','advantage','sameness','benefit'];
   F.forEach(function (id) {
     var el = document.getElementById(id);
     try { el.value = localStorage.getItem('sb_' + id) || ''; } catch (e) {}
@@ -108,7 +106,6 @@
     var feat = v('feature');
     var adv = v('advantage');
     var same = v('sameness');
-    var scale = v('scale');
     var ben = v('benefit');
 
     var missing = [];
@@ -128,7 +125,6 @@
     p.push("I'll cut to the chase. The reason for the video is because I help businesses " + feat + ".");
     if (adv) p.push("This typically " + adv + (ben ? ", " + ben : "") + ".");
     if (same) p.push(same);
-    if (scale) p.push(scale);
     p.push("If this is something you guys would be interested in, or that you are exploring currently, I'd love an opportunity to talk to you about how " + co + " can be a partner and resource for you. If not, thanks again for the connection, and I hope you have a fantastic rest of your day. Take care. Bye.");
     return p.join(' ').replace(/\s+/g, ' ').trim();
   }

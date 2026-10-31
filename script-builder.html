@@ -81,11 +81,13 @@
     <h2>Your script (edit anything you like)</h2>
     <textarea id="script"></textarea>
     <div class="btnrow">
+      <button id="polishBtn">✨ Make It Better</button>
       <a id="teleBtn" target="_blank" rel="noopener">Open in Teleprompter</a>
       <button id="copyBtn">Copy Script</button>
       <button id="linkBtn">Create Phone Link</button>
     </div>
     <p class="ok" id="copied"></p>
+    <p class="ok" id="polishNote" style="color:#8f7ae8;"></p>
     <p class="re"><button id="editBtn">← Back to questions</button></p>
   </div>
 </div>
@@ -182,6 +184,41 @@
   document.getElementById('editBtn').addEventListener('click', function () {
     document.getElementById('out').style.display = 'none';
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // AI polish: sends the current script to the script-polish service
+  var POLISH_URL = 'https://script-polish-11970559310.us-central1.run.app/';
+  document.getElementById('polishBtn').addEventListener('click', function () {
+    var btn = this, note = document.getElementById('polishNote');
+    var text = document.getElementById('script').value.trim();
+    if (!text) return;
+    btn.disabled = true;
+    btn.textContent = 'Polishing...';
+    note.style.display = 'none';
+    fetch(POLISH_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ script: text })
+    })
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      if (data.polished) {
+        document.getElementById('script').value = data.polished;
+        refreshLinks(data.polished);
+        note.textContent = 'Polished ✓ — edit anything you like, or polish again.';
+      } else {
+        note.textContent = 'Sorry, polishing failed — try again in a moment.';
+      }
+      note.style.display = 'block';
+    })
+    .catch(function () {
+      note.textContent = 'Sorry, polishing failed — try again in a moment.';
+      note.style.display = 'block';
+    })
+    .finally(function () {
+      btn.disabled = false;
+      btn.textContent = '✨ Make It Better';
+    });
   });
 })();
 </script>

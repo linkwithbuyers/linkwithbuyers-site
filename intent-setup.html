@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Link With Buyers - Intent Setup</title>
+<style>
+  :root { --purple: #5a3bd0; }
+  * { box-sizing: border-box; font-family: "Segoe UI", system-ui, sans-serif; }
+  body { margin: 0; background: #f6f5fb; color: #241c47; }
+  header { background: var(--purple); color: #fff; padding: 26px 20px; text-align: center; }
+  header h1 { margin: 0 0 6px; font-size: 26px; }
+  header p { margin: 0 auto; max-width: 720px; opacity: .92; font-size: 15px; line-height: 1.5; }
+  main { max-width: 760px; margin: 28px auto 80px; padding: 0 18px; }
+  .card { background: #fff; border-radius: 14px; padding: 24px 28px; box-shadow: 0 2px 12px rgba(60,40,150,.09); margin-bottom: 20px; }
+  h2 { font-size: 17px; margin: 0 0 4px; color: var(--purple); }
+  .hint { font-size: 13px; color: #6a5fa8; margin: 2px 0 12px; line-height: 1.45; }
+  label { display: block; font-size: 13px; font-weight: 600; margin: 14px 0 4px; }
+  input[type=text], input[type=email], textarea { width: 100%; border: 1px solid #d8d3ee; border-radius: 8px; padding: 10px 12px; font-size: 14px; }
+  textarea { min-height: 70px; }
+  input:focus, textarea:focus { outline: 2px solid #c9c0f2; border-color: var(--purple); }
+  .competitor { border: 1px dashed #cfc8f0; border-radius: 10px; padding: 12px 14px; margin-top: 10px; }
+  .competitor input { margin-bottom: 6px; }
+  button { background: var(--purple); color: #fff; border: 0; border-radius: 8px; padding: 14px 26px; font-size: 16px; font-weight: 600; cursor: pointer; width: 100%; }
+  button:disabled { opacity: .6; cursor: wait; }
+  button.ghost { background: #ece8fb; color: var(--purple); width: auto; padding: 10px 16px; font-size: 13px; font-weight: 600; }
+  .status { margin-top: 12px; font-size: 14px; min-height: 20px; text-align: center; }
+  .ok { color: #1a7a4a; font-weight: 600; }
+  .err { color: #b3261e; }
+  .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid #c9c0f2; border-top-color: var(--purple); border-radius: 50%; animation: spin .8s linear infinite; vertical-align: -2px; margin-right: 6px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .badge-step { display: inline-block; background: var(--purple); color: #fff; border-radius: 50%; width: 24px; height: 24px; text-align: center; line-height: 24px; font-size: 13px; font-weight: 700; margin-right: 8px; }
+  footer { text-align: center; color: #9a93c2; font-size: 12px; margin-top: -50px; padding-bottom: 30px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Let's find your future clients who are already paying attention</h1>
+  <p>We watch the LinkedIn pages of your competitors and industry neighbors, and every week we spot the people who like and comment on their posts. Those people are actively looking for what you sell. Answer the questions below (about 5 minutes) and we'll start delivering a fresh list of warm prospects to your sheet every Monday.</p>
+</header>
+<main>
+<form id="f">
+  <div class="card">
+    <h2><span class="badge-step">1</span>About you</h2>
+    <label>Your name</label>
+    <input type="text" id="name" required placeholder="Jane Smith">
+    <label>Your company</label>
+    <input type="text" id="company" required placeholder="Acme Staffing">
+    <label>Your email</label>
+    <input type="email" id="email" required placeholder="jane@acme.com">
+  </div>
+
+  <div class="card">
+    <h2><span class="badge-step">2</span>Who do you want as clients?</h2>
+    <p class="hint">Describe the person who hires you: their job titles, the kind of company they work at, and where they are. "Owner or COO at 50-200 person logistics companies in Texas" is perfect.</p>
+    <label>Job titles they'd have</label>
+    <input type="text" id="titles" required placeholder="Owner, COO, VP of Operations">
+    <label>Where they are (cities / region)</label>
+    <input type="text" id="locations" required placeholder="Kansas City metro, or nationwide">
+    <label>Company size, if it matters (optional)</label>
+    <input type="text" id="size" placeholder="50 to 200 employees">
+  </div>
+
+  <div class="card">
+    <h2><span class="badge-step">3</span>Whose audience do you want to watch?</h2>
+    <p class="hint">List competitors and industry neighbors whose LinkedIn pages attract your future clients. If you know their LinkedIn page address (linkedin.com/company/...), paste it. If not, just give us the company name and we'll find the page. Think: who would your best client be following before they call you?</p>
+    <div class="competitor"><input type="text" id="c1" required placeholder="Competitor 1: company name"><input type="text" id="c1url" placeholder="Their LinkedIn page URL (optional)"></div>
+    <div class="competitor"><input type="text" id="c2" placeholder="Competitor 2: company name"><input type="text" id="c2url" placeholder="Their LinkedIn page URL (optional)"></div>
+    <div class="competitor"><input type="text" id="c3" placeholder="Competitor 3: company name"><input type="text" id="c3url" placeholder="Their LinkedIn page URL (optional)"></div>
+    <div class="competitor"><input type="text" id="c4" placeholder="Competitor 4: company name (optional)"><input type="text" id="c4url" placeholder="Their LinkedIn page URL (optional)"></div>
+    <div class="competitor"><input type="text" id="c5" placeholder="Competitor 5: company name (optional)"><input type="text" id="c5url" placeholder="Their LinkedIn page URL (optional)"></div>
+    <label>Professional pages you already follow that your clients also follow (optional)</label>
+    <textarea id="other" placeholder="Associations, industry newsletters, big-name consultants your buyers pay attention to..."></textarea>
+  </div>
+
+  <div class="card">
+    <h2><span class="badge-step">4</span>Who should we EXCLUDE?</h2>
+    <p class="hint">The people liking your competitors' posts are usually your future clients, but not always. Tell us who to leave off the list. Common examples: other people who do what you do, recruiters, job seekers, employees of big competitor firms.</p>
+    <textarea id="exclude" placeholder="Other staffing agencies, recruiters, HR managers at staffing firms..."></textarea>
+  </div>
+
+  <div class="card" style="text-align:center">
+    <button type="submit" id="submit">Submit my intent setup</button>
+    <div class="status" id="status"></div>
+    <p class="hint" style="margin-top:14px">What happens next: we verify the pages, run a first collection this week, and your first list of warm prospects lands in your sheet with a note about what each person engaged with, so you know exactly how to open the conversation.</p>
+  </div>
+</form>
+</main>
+<footer>Link With Buyers - personalized video outreach that gets watched</footer>
+<script>
+const WEBHOOK = 'https://linkwithbuyers.app.n8n.cloud/webhook/intent-setup';
+const f = document.getElementById('f');
+f.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const status = document.getElementById('status');
+  const btn = document.getElementById('submit');
+  const val = id => document.getElementById(id).value.trim();
+  const competitors = [];
+  for (let i = 1; i <= 5; i++) {
+    const n = val('c' + i); if (!n) continue;
+    competitors.push({ name: n, url: val('c' + i + 'url') });
+  }
+  const body = {
+    name: val('name'), company: val('company'), email: val('email'),
+    titles: val('titles'), locations: val('locations'), size: val('size'),
+    competitors, otherPages: val('other'), exclude: val('exclude'),
+    submittedAt: new Date().toISOString()
+  };
+  btn.disabled = true;
+  status.innerHTML = '<span class="spinner"></span>Sending...';
+  try {
+    const res = await fetch(WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    status.className = 'status ok';
+    status.textContent = 'Got it! We\'re on it. Watch your sheet for the first list of warm prospects.';
+    btn.textContent = 'Submitted';
+  } catch (err) {
+    status.className = 'status err';
+    status.innerHTML = 'Something went wrong. Email your answers to us instead, or call David.';
+    btn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>

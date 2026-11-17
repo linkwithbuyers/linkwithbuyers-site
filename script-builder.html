@@ -8,38 +8,40 @@
 <link rel="icon" type="image/png" href="rabbit-icon-clean.png">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-  html, body { min-height: 100%; background: #11121a; color: #f7f6fb;
-               font-family: -apple-system, "Segoe UI", Roboto, sans-serif; }
-  .wrap { max-width: 640px; margin: 0 auto; padding: 20px 18px calc(40px + env(safe-area-inset-bottom)); }
+  html, body { min-height: 100%; background: #f6f5fb; color: #241c47;
+               font-family: "Segoe UI", system-ui, -apple-system, sans-serif; }
+  body { padding: 30px 14px 44px; }
+  .wrap { max-width: 640px; margin: 0 auto; background: #fff; border: 1px solid #ece8fb; border-radius: 14px;
+          box-shadow: 0 2px 12px rgba(60,40,150,.09); padding: 26px 24px calc(34px + env(safe-area-inset-bottom)); }
   header { display: flex; align-items: center; gap: 10px; padding: 6px 0 14px; }
   header img { width: 38px; height: 38px; border-radius: 8px; }
-  header h1 { font-size: 22px; }
-  .hint { color: #a9aab8; font-size: 14px; line-height: 1.5; margin-bottom: 8px; }
+  header h1 { font-size: 22px; color: #5a3bd0; }
+  .hint { color: #6a5fa8; font-size: 14px; line-height: 1.5; margin-bottom: 8px; }
   fieldset { border: none; margin-top: 18px; }
   legend { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
-           color: #a996ff; margin-bottom: 10px; }
-  label { display: block; font-size: 13px; color: #a9aab8; margin: 12px 0 5px; line-height: 1.4; }
-  input, textarea { width: 100%; padding: 11px 13px; background: #11121a; color: #f7f6fb;
-                    border: 1px solid #353746; border-radius: 10px; font-size: 16px; }
+           color: #5a3bd0; margin-bottom: 10px; }
+  label { display: block; font-size: 13px; color: #241c47; margin: 12px 0 5px; line-height: 1.4; }
+  input, textarea { width: 100%; padding: 11px 13px; background: #fff; color: #241c47;
+                    border: 1px solid #d8d3ee; border-radius: 10px; font-size: 16px; }
   textarea { min-height: 70px; resize: vertical; line-height: 1.45; }
-  input:focus, textarea:focus { outline: none; border-color: #a996ff; }
-  .ex { color: #a9aab8; font-size: 12px; margin-top: 4px; }
+  input:focus, textarea:focus { outline: 2px solid #c9c0f2; border-color: #5a3bd0; }
+  .ex { color: #9a93c2; font-size: 12px; margin-top: 4px; }
   button.primary { width: 100%; margin-top: 24px; padding: 16px; border: none; border-radius: 12px;
-                   background: #715cff; color: #fff; font-size: 17px; font-weight: 700; }
-  button.primary:hover { background: #8b72ff; }
+                   background: #5a3bd0; color: #fff; font-size: 17px; font-weight: 700; }
+  button.primary:hover { background: #6b4ce0; }
   #out { display: none; margin-top: 26px; }
   #out h2 { font-size: 17px; margin-bottom: 10px; }
-  #script { width: 100%; min-height: 320px; padding: 14px; background: #181a25; color: #f7f6fb;
-            border: 1px solid #353746; border-radius: 12px; font-size: 15px; line-height: 1.6; }
+  #script { width: 100%; min-height: 320px; padding: 14px; background: #fff; color: #241c47;
+            border: 1px solid #d8d3ee; border-radius: 12px; font-size: 15px; line-height: 1.6; }
   .btnrow { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
   .btnrow a, .btnrow button { flex: 1; min-width: 140px; text-align: center; padding: 13px 8px;
                               border-radius: 10px; font-size: 15px; font-weight: 600;
-                              text-decoration: none; border: 1px solid #353746; background: #181a25; color: #f7f6fb; }
-  .btnrow a { background: #715cff; border-color: #715cff; }
-  .ok { color: #34d399; font-size: 14px; margin-top: 10px; display: none; }
-  .missing { color: #ffb84d; font-size: 13px; margin-top: 12px; display: none; line-height: 1.5; }
+                              text-decoration: none; border: none; background: #ece8fb; color: #5a3bd0; }
+  .btnrow a { background: #5a3bd0; border: none; color: #fff; }
+  .ok { color: #1a7a4a; font-size: 14px; margin-top: 10px; display: none; }
+  .missing { color: #b45309; font-size: 13px; margin-top: 12px; display: none; line-height: 1.5; }
   .re { margin-top: 14px; text-align: center; }
-  .re button { background: none; border: none; color: #a9aab8; font-size: 14px; text-decoration: underline; }
+  .re button { background: none; border: none; color: #9a93c2; font-size: 14px; text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -88,7 +90,7 @@
       <button id="linkBtn">Create Phone Link</button>
     </div>
     <p class="ok" id="copied"></p>
-    <p class="ok" id="polishNote" style="color:#a996ff;"></p>
+    <p class="ok" id="polishNote" style="color:#5a3bd0;"></p>
     <p class="re"><button id="editBtn">← Back to questions</button></p>
   </div>
 </div>
